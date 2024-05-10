@@ -1,15 +1,18 @@
 import "dotenv/config";
-import { Sequelize } from "sequelize";
+import { Dialect, Sequelize } from "sequelize";
+import { DatabaseEnv } from "../utils";
+
+//Obteniendo los environment
+const env = DatabaseEnv.getInstance();
 
 //Detalles de conexión
 export const dbInstance = new Sequelize({
-    dialect: process.env.DB_DIALECT,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    logger: true
+    dialect: env.DB_DIALECT as unknown as Dialect,
+    host: env.DB_HOST,
+    port: env.DB_PORT,
+    username: env.DB_USER,
+    password: env.DB_PASS,
+    database: env.DB_NAME,
 });
 
 
@@ -19,6 +22,5 @@ export async function connection() {
         console.log(`Conexión a database establecida`);
     } catch (error) {
         console.log("Error al establecer conexion con database");
-        // return error;
     }
 }

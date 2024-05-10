@@ -1,7 +1,8 @@
-import { dbInstance } from "../../database/config.js"
-import { Task } from "../../model/index.js"
+import { Request, Response } from "express";
+import { dbInstance } from "../../database/config";
+import { Task } from "../../model/index"
 
-export const createTaskController = async (req, res) => {
+export const createTaskController = async (req: Request, res: Response) => {
     const { ...data } = req.body
     const transaction = await dbInstance.transaction();
     try {

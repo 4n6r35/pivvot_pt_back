@@ -1,8 +1,10 @@
-import { dbInstance } from "../../database/config.js"
-import { Task } from "../../model/index.js";
+
+import { Request, Response } from "express";
+import { dbInstance } from "../../database/config";
+import { Task } from "../../model/index";
 
 
-export const deleteTaskController = async (req, res) => {
+export const deleteTaskController = async (req: Request, res: Response) => {
     const { id_task } = req.body
     const transaction = await dbInstance.transaction();
     await Task.update({ state: false }, {

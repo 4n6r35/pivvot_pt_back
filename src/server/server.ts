@@ -1,15 +1,20 @@
-import express from 'express'
+import express, { Application } from 'express'
 import cors from 'cors'
 import "dotenv/config"
-import { connection } from '../database/config.js';
-import { taskRouter } from '../routes/task.route.js';
+import { SystemEnv } from '../utils';
+import { connection } from '../database/config';
+import { taskRouter } from '../routes/task.route';
 
 export class Server {
+    private readonly app: Application;
+    private readonly _env: SystemEnv;
+    private paths = {
+        task: '/api/task'
+    }
 
     constructor() {
-        this.app = express()
-        this.port = process.env.REST_PORT;
-        this.taskPath = '/api/task'
+        this.app = express();
+        this._env = SystemEnv.getInstance();
 
         //Conectar Base de datos
         this.ConectarDB();
@@ -33,12 +38,12 @@ export class Server {
     }
 
     routes() {
-      this.app.use(this.taskPath, taskRouter)  
+        this.app.use(this.paths.task, taskRouter)
     }
 
     listen() {
-        this.app.listen(this.port, () => {
-            console.log('Servidor corriendo en puerto', this.port);
+        this.app.listen(this._env.REST_PORT, () => {
+            console.log(`Servidor corriendo en puerto ${this._env.REST_PORT}` );
         });
     }
 }

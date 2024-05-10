@@ -1,8 +1,8 @@
-import { Task } from "../../model/index.js"
+import { Request, Response } from "express"
+import { Task } from "../../model/index"
 
-
-export const listTaskController = async (req, res) => {
-    const { page, size } = req.query
+export const listTaskController = async (req: Request, res: Response) => {
+    const { page, size } = req.query as any
     try {
 
         const { rows, count } = await Task.findAndCountAll({
@@ -13,21 +13,12 @@ export const listTaskController = async (req, res) => {
             limit: Number(size)
         })
 
-        const dataRes = rows.map(x => {
-            return {
-                id_task: x.id_task,
-                title: x.title,
-                description: x.description,
-                date: x.date
-            }
-        })
-
         return res.status(200).json({
             ok: true,
             message: "descuentos obtenidos exitosamente",
             data: {
                 total_tasks: count,
-                dataRes
+                rows// dataRes
             }
         })
     } catch (error) {

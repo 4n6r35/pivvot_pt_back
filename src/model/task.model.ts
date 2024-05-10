@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { dbInstance } from "../database/config.js";
+import { dbInstance } from "../database/config";
 
 export const Task = dbInstance
     .define(
@@ -10,8 +10,8 @@ export const Task = dbInstance
                 primaryKey: true,
                 autoIncrement: true,
             },
-            title: DataTypes.BIGINT,
-            description: DataTypes.BIGINT,
+            title: DataTypes.STRING,
+            description: DataTypes.STRING,
             date: DataTypes.DATE,
             state:{
                 type:DataTypes.BOOLEAN,

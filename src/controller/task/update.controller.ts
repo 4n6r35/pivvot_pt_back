@@ -1,8 +1,9 @@
-import { dbInstance } from "../../database/config.js"
-import { Task } from "../../model/index.js"
+import { Request, Response } from "express"
+import { dbInstance } from "../../database/config"
+import { Task } from "../../model/index"
 
 
-export const updateTaskList = async (req, res) => {
+export const updateTaskList = async (req: Request, res: Response) => {
     const { ...data } = req.body
     const transaction = await dbInstance.transaction()
     try {
@@ -12,7 +13,7 @@ export const updateTaskList = async (req, res) => {
             },
             transaction: transaction
         });
-    
+
         transaction.commit();
         return res.status(200).json({
             menssage: "Task actualizada exitosamente",
