@@ -15,7 +15,7 @@ export const listTaskController = async (req: Request, res: Response) => {
 
         return res.status(200).json({
             ok: true,
-            message: "descuentos obtenidos exitosamente",
+            message: "task obtenidas exitosamente",
             data: {
                 total_tasks: count,
                 rows// dataRes
