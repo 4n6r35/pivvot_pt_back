@@ -1,24 +1,20 @@
 import { Request, Response } from "express"
 import { Task } from "../../model/index"
 
-export const listTaskController = async (req: Request, res: Response) => {
+export const getByIdTaskController = async (req: Request, res: Response) => {
+    const { id_task } = req.body
     try {
-        const { rows, count } = await Task.findAndCountAll({
+        const task = await Task.findOne({
             where: {
+                id_task: id_task,
                 state: true
-            },
-            order: [
-                ['createdAt', 'DESC']
-            ]
+            }
         })
 
         return res.status(200).json({
             ok: true,
             message: "Tareas obtenidas exitosamente",
-            data: {
-                total_tasks: count,
-                rows
-            }
+            task
         })
     } catch (error) {
         console.log(error);

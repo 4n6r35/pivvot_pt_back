@@ -16,6 +16,7 @@ export const updateTaskList = async (req: Request, res: Response) => {
 
         transaction.commit();
         return res.status(200).json({
+            ok:true,
             menssage: "Task actualizada exitosamente",
         })
     } catch (error) {

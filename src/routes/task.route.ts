@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createTaskController, deleteTaskController, listTaskController, updateTaskList } from "../controller/index";
+import { getByIdTaskController } from "../controller/task/getById.controller";
 
 
 const taskRouter = Router();
@@ -7,6 +8,8 @@ const taskRouter = Router();
 taskRouter.post('/create', createTaskController)
 
 taskRouter.get('/list', listTaskController)
+
+taskRouter.post('/by-id', getByIdTaskController)
 
 taskRouter.post('/update', updateTaskList)
 

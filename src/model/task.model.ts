@@ -10,13 +10,24 @@ export const Task = dbInstance
                 primaryKey: true,
                 autoIncrement: true,
             },
-            title: DataTypes.STRING,
-            description: DataTypes.STRING,
-            date: DataTypes.DATE,
-            state:{
-                type:DataTypes.BOOLEAN,
+            title: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            description: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+
+            date: {
+                type: DataTypes.DATE,
+                allowNull: true
+            },
+
+            state: {
+                type: DataTypes.BOOLEAN,
                 defaultValue: true
-            } 
+            }
         },
         {
             tableName: "tasks",
